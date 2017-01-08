@@ -9,6 +9,7 @@ import sys
 import io
 import tweepy
 from time import sleep
+from random import randint
 from secrets import *
 
 class TweetBot:
@@ -28,17 +29,18 @@ class TweetBot:
         stripped_corpus = [line.strip() for line in corpus_lines if line.strip()]
         return stripped_corpus
         
-    def tweet(self, message):
-        self.api.update_status(message)
+    def tweet(self):
+        line = self.corpus[randint(0, len(self.corpus) - 1)]
+        try:
+            self.api.update_status(line)
+        except tweepy.TweepError as error:
+            print(error.reason)
         
     def automate(self):
-        for line in self.corpus:            
-            try:
-                self.tweet(line)
-            except tweepy.TweepError as error:
-                print(error.reason)
+        while True:
+            self.tweet()
             sleep(self.delay)
-            
+                    
 def main(args):
     args = args[1:]
     bot = TweetBot(args[0], int(args[1]))
