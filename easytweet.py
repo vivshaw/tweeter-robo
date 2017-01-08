@@ -24,7 +24,8 @@ class TweetBot:
     def load_corpus(corpus):
         with open(corpus, 'r') as corpus_file:
             corpus_lines = corpus_file.readlines()
-        return corpus_lines
+        stripped_corpus = [line.rstrip() for line in corpus_lines if line.rstrip()]
+        return stripped_corpus
         
     def tweet(self, message):
         self.api.update_status(message)
