@@ -40,7 +40,7 @@ class TweetBot:
         while True:
             self.tweet()
             sleep(self.delay)
-                    
+            
 def main(args):
     args = args[1:]
     bot = TweetBot(args[0], int(args[1]))
