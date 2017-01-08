@@ -6,6 +6,7 @@ Created on Sat Jan  7 19:27:34 2017
 """
 
 import sys
+import io
 import tweepy
 from time import sleep
 from secrets import *
@@ -22,9 +23,9 @@ class TweetBot:
     
     @staticmethod
     def load_corpus(corpus):
-        with open(corpus, 'r') as corpus_file:
+        with io.open(corpus, encoding='utf8') as corpus_file:
             corpus_lines = corpus_file.readlines()
-        stripped_corpus = [line.rstrip() for line in corpus_lines if line.rstrip()]
+        stripped_corpus = [line.strip() for line in corpus_lines if line.strip()]
         return stripped_corpus
         
     def tweet(self, message):
@@ -33,7 +34,6 @@ class TweetBot:
     def automate(self):
         for line in self.corpus:            
             try:
-                print(line)
                 self.tweet(line)
             except tweepy.TweepError as error:
                 print(error.reason)
