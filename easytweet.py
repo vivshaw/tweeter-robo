@@ -18,11 +18,11 @@ class TweetBot:
         self.api = tweepy.API(self.auth)
         
         #initialize corpus (after processing) and delay
-        self.corpus = TweetBot.loadCorpus(corpus)
+        self.corpus = TweetBot.load_corpus(corpus)
         self.delay = delay
     
     @staticmethod
-    def loadCorpus(corpus):
+    def load_corpus(corpus):
         with open(corpus, 'r') as corpus_file:
             corpus_lines = corpus_file.readlines()
         return corpus_lines
