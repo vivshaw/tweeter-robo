@@ -8,13 +8,15 @@ Created on Sat Jan  7 19:27:34 2017
 import sys
 import io
 import tweepy
+import markovify
 from time import sleep
 from random import randint
 from secrets import *
 
 class TweetBot:
     def __init__(self, corpus, delay):
-        self.corpus = TweetBot.load_corpus(corpus)
+        corpus = TweetBot.load_corpus(corpus)
+        self.model = markovify.Text(corpus)
         self.delay = delay
 
         #initialize Twitter authorization with Tweepy
@@ -25,14 +27,13 @@ class TweetBot:
     @staticmethod
     def load_corpus(corpus):
         with io.open(corpus, encoding='utf8') as corpus_file:
-            corpus_lines = corpus_file.readlines()
-        stripped_corpus = [line.strip() for line in corpus_lines if line.strip()]
-        return stripped_corpus
+            corpus_lines = corpus_file.read()
+        return corpus_lines
         
     def tweet(self):
-        line = self.corpus[randint(0, len(self.corpus) - 1)]
+        message = self.model.make_short_sentence(140)
         try:
-            self.api.update_status(line)
+            self.api.update_status(message)
         except tweepy.TweepError as error:
             print(error.reason)
         
