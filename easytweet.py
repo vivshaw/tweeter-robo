@@ -17,13 +17,15 @@ class TweetBot:
         self.auth.set_access_token(access_key, access_secret)
         self.api = tweepy.API(self.auth)
         
-        #initialize other fields
+        #initialize corpus (after processing) and delay
         self.corpus = TweetBot.loadCorpus(corpus)
         self.delay = delay
     
     @staticmethod
     def loadCorpus(corpus):
-        return corpus
+        with open(corpus, 'r') as corpus_file:
+            corpus_lines = corpus_file.readlines()
+        return corpus_lines
         
     def tweet(self, message):
         self.api.update_status(message)
@@ -34,8 +36,7 @@ class TweetBot:
 def main(args):
     args = args[1:]
     bot = TweetBot(args[0], args[1])
-    print(bot.corpus, bot.delay)
-    bot.tweet("Hello World!")
+    
 
 if __name__ == "__main__":
     main(sys.argv)
