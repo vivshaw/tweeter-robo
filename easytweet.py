@@ -12,14 +12,13 @@ from secrets import *
 
 class TweetBot:
     def __init__(self, corpus, delay):
+        self.corpus = TweetBot.load_corpus(corpus)
+        self.delay = delay
+
         #initialize Twitter authorization with Tweepy
         self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         self.auth.set_access_token(access_key, access_secret)
         self.api = tweepy.API(self.auth)
-        
-        #initialize corpus (after processing) and delay
-        self.corpus = TweetBot.load_corpus(corpus)
-        self.delay = delay
     
     @staticmethod
     def load_corpus(corpus):
@@ -29,14 +28,20 @@ class TweetBot:
         
     def tweet(self, message):
         self.api.update_status(message)
-
+        
     def automate(self):
-        pass
-    
+        for line in self.corpus:            
+            try:
+                print(line)
+                self.tweet(line)
+            except tweepy.TweepError as error:
+                print(error.reason)
+            sleep(self.delay)
+            
 def main(args):
     args = args[1:]
-    bot = TweetBot(args[0], args[1])
-    
+    bot = TweetBot(args[0], int(args[1]))
+    bot.automate();
 
 if __name__ == "__main__":
     main(sys.argv)
