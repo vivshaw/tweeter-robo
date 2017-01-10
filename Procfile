@@ -1,0 +1,1 @@
+worker: python tweeter-robo.py corpus.txt 7200
