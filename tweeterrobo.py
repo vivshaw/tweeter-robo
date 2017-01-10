@@ -51,7 +51,6 @@ class TweetBot:
             
 def main(args):
     args = args[1:]
-    
     bot = TweetBot(args[0], int(args[1]))
     bot.automate();
 
