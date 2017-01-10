@@ -1,1 +1,2 @@
 tweepy==3.5.0
+markovify==0.5.4
