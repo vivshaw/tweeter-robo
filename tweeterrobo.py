@@ -7,11 +7,18 @@ Created on Sat Jan  7 19:27:34 2017
 
 import sys
 import io
+import os
 import tweepy
 import markovify
 from time import sleep
-from random import randint
-from secrets import *
+
+if os.getenv("HEROKU"):
+    consumer_key = os.getenv("CONSUMER_KEY")
+    consumer_secret = os.getenv("CONSUMER_SECRET")
+    access_key = os.getenv("ACCESS_KEY")
+    access_secret = os.getenv("ACCESS_SECRET")
+else:
+    from secrets import *
 
 class TweetBot:
     def __init__(self, corpus, delay):
@@ -44,6 +51,7 @@ class TweetBot:
             
 def main(args):
     args = args[1:]
+    
     bot = TweetBot(args[0], int(args[1]))
     bot.automate();
 
