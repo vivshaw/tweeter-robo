@@ -53,6 +53,9 @@ class TweetBot:
         for i in range (limit):
             self.tweet()
             sleep(self.delay)
+    
+    def reply(self, time):
+        pass
             
 def main(args):
     args = args[1:]
