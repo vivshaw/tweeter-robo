@@ -49,6 +49,11 @@ class TweetBot:
             self.tweet()
             sleep(self.delay)
             
+    def automate_with_limit(self, limit):
+        for i in range (limit):
+            self.tweet()
+            sleep(self.delay)
+            
 def main(args):
     args = args[1:]
     bot = TweetBot(args[0], int(args[1]))
