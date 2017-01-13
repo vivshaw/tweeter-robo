@@ -61,9 +61,15 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("corpus", help="filename of the text corpus used as input for the Markov chain")
     parser.add_argument("-d", "--delay", type=int, default=7200, help="delay in seconds between tweets (default: 7200)")
+    parser.add_argument("-l", "--limit", type=int, default=0, help="number of tweets to send before exit (default: no limit)")
     args = parser.parse_args()
+    
     bot = TweetBot(args.corpus, args.delay)
-    bot.automate();
+    if args.limit:
+        for i in range(args.limit):
+            bot.tweet()
+    else:
+        bot.automate();
 
 if __name__ == "__main__":
     main()
