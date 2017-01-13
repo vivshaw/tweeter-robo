@@ -1,1 +1,1 @@
-worker: python tweeterrobo.py corpus.txt 7200
+worker: python tweeter_robo_go.py corpus.txt --delay 7200 --limit 4
