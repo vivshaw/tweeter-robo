@@ -59,9 +59,11 @@ class TweetBot:
             
 def main():
     parser = argparse.ArgumentParser()
-    parser.parse_args()
-    #bot = TweetBot()
-    #bot.automate();
+    parser.add_argument("corpus", help="filename of the text corpus used as input for the Markov chain")
+    parser.add_argument("-d", "--delay", type=int, default=7200, help="delay in seconds between tweets (default: 7200)")
+    args = parser.parse_args()
+    bot = TweetBot(args.corpus, args.delay)
+    bot.automate();
 
 if __name__ == "__main__":
     main()
