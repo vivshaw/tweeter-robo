@@ -6,7 +6,6 @@ Created on Sat Jan  7 19:27:34 2017
 """
 
 import sys
-import io
 import os
 import tweepy
 import markovify
@@ -33,7 +32,7 @@ class TweetBot:
     
     @staticmethod
     def load_corpus(corpus):
-        with io.open(corpus, encoding='utf8') as corpus_file:
+        with open(corpus) as corpus_file:
             corpus_lines = corpus_file.read()
         return corpus_lines
         
@@ -54,7 +53,7 @@ class TweetBot:
             self.tweet()
             sleep(self.delay)
     
-    def reply(self, time):
+    def reply(self, reply_within):
         pass
             
 def main(args):
