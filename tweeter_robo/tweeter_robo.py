@@ -15,8 +15,8 @@ from time import sleep
 if os.getenv("HEROKU"):
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
-    access_key = os.getenv("ACCESS_TOKEN")
-    access_secret = os.getenv("ACCESS_TOKEN_SECRET")
+    access_token = os.getenv("ACCESS_TOKEN")
+    access_token_secret = os.getenv("ACCESS_TOKEN_SECRET")
 else:
     from tweeter_robo.twitter_credentials import consumer_key, consumer_secret, access_token, access_token_secret
 
