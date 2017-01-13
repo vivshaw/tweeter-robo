@@ -73,6 +73,3 @@ def main():
             bot.automate_with_limit(args.limit)
         else:
             bot.automate();
-
-if __name__ == "__main__":
-    main()
