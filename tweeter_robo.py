@@ -62,14 +62,17 @@ def main():
     parser.add_argument("corpus", help="filename of the text corpus used as input for the Markov chain")
     parser.add_argument("-d", "--delay", type=int, default=7200, help="delay in seconds between tweets (default: 7200)")
     parser.add_argument("-l", "--limit", type=int, default=0, help="number of tweets to send before exit (default: no limit)")
+    parser.add_argument("-r", "--reply", type=int, default=0, help="instead of writing new tweets, reply to @mentions from within the past X seconds")
     args = parser.parse_args()
     
     bot = TweetBot(args.corpus, args.delay)
-    if args.limit:
-        for i in range(args.limit):
-            bot.tweet()
+    if args.reply:
+        bot.reply(args.reply)
     else:
-        bot.automate();
+        if args.limit:
+            bot.automate_with_limit(args.limit)
+        else:
+            bot.automate();
 
 if __name__ == "__main__":
     main()
