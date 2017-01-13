@@ -7,6 +7,7 @@ Created on Sat Jan  7 19:27:34 2017
 
 import sys
 import os
+import argparse
 import tweepy
 import markovify
 from time import sleep
@@ -56,10 +57,11 @@ class TweetBot:
     def reply(self, reply_within):
         pass
             
-def main(args):
-    args = args[1:]
-    bot = TweetBot(args[0], int(args[1]))
-    bot.automate();
+def main():
+    parser = argparse.ArgumentParser()
+    parser.parse_args()
+    #bot = TweetBot()
+    #bot.automate();
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
