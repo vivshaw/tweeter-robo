@@ -14,10 +14,10 @@ from time import sleep
 if os.getenv("HEROKU"):
     consumer_key = os.getenv("CONSUMER_KEY")
     consumer_secret = os.getenv("CONSUMER_SECRET")
-    access_key = os.getenv("ACCESS_KEY")
-    access_secret = os.getenv("ACCESS_SECRET")
+    access_key = os.getenv("ACCESS_TOKEN")
+    access_secret = os.getenv("ACCESS_TOKEN_SECRET")
 else:
-    from secrets import *
+    from secrets import consumer_key, consumer_secret, access_token, access_token_secret
 
 class TweetBot:
     def __init__(self, corpus, delay):
@@ -27,7 +27,7 @@ class TweetBot:
 
         #initialize Twitter authorization with Tweepy
         self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        self.auth.set_access_token(access_key, access_secret)
+        self.auth.set_access_token(access_token, access_token_secret)
         self.api = tweepy.API(self.auth)
     
     @staticmethod
