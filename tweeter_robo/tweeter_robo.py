@@ -21,19 +21,18 @@ else:
 
 class TweetBot:
     def __init__(self, corpus, delay):
-        corpus = self.load_corpus(corpus)
-        self.model = markovify.Text(corpus)
+        self.load_corpus(corpus)
         self.delay = delay
 
         #initialize Twitter authorization with Tweepy
-        self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        self.auth.set_access_token(access_token, access_token_secret)
-        self.api = tweepy.API(self.auth)
+        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+        auth.set_access_token(access_token, access_token_secret)
+        self.api = tweepy.API(auth)
 
     def load_corpus(self, corpus):
         with open(corpus) as corpus_file:
             corpus_lines = corpus_file.read()
-        return corpus_lines
+        self.model = markovify.Text(corpus_lines)
         
     def tweet(self):
         message = self.model.make_short_sentence(140)
