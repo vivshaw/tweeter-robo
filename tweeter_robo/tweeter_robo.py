@@ -20,9 +20,8 @@ else:
     from tweeter_robo.twitter_credentials import consumer_key, consumer_secret, access_token, access_token_secret
 
 class TweetBot:
-    def __init__(self, corpus, delay):
+    def __init__(self, corpus):
         self.load_corpus(corpus)
-        self.delay = delay
 
         #initialize Twitter authorization with Tweepy
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -41,15 +40,15 @@ class TweetBot:
         except tweepy.TweepError as error:
             print(error.reason)
         
-    def automate(self):
+    def automate(self, delay):
         while True:
             self.tweet()
-            sleep(self.delay)
+            sleep(delay)
             
-    def automate_with_limit(self, limit):
+    def automate_with_limit(self, delay, limit):
         for i in range (limit):
             self.tweet()
-            sleep(self.delay)
+            sleep(delay)
     
     def reply(self, reply_within):
         pass
@@ -69,11 +68,11 @@ def main():
     parser.add_argument("-r", "--reply", type=int, default=0, help="instead of writing new tweets, reply to @mentions from within the past X seconds")
     args = parser.parse_args()
     
-    bot = TweetBot(args.corpus, args.delay)
+    bot = TweetBot(args.corpus)
     if args.reply:
         bot.reply(args.reply)
     else:
         if args.limit:
-            bot.automate_with_limit(args.limit)
+            bot.automate_with_limit(args.delay, args.limit)
         else:
-            bot.automate();
+            bot.automate(args.delay)
