@@ -5,7 +5,6 @@ Created on Sat Jan  7 19:27:34 2017
 @author: vivshaw
 """
 
-import sys
 import os
 import argparse
 import tweepy
@@ -22,7 +21,7 @@ else:
 
 class TweetBot:
     def __init__(self, corpus, delay):
-        corpus = TweetBot.load_corpus(corpus)
+        corpus = self.load_corpus(corpus)
         self.model = markovify.Text(corpus)
         self.delay = delay
 
@@ -30,9 +29,8 @@ class TweetBot:
         self.auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
         self.auth.set_access_token(access_token, access_token_secret)
         self.api = tweepy.API(self.auth)
-    
-    @staticmethod
-    def load_corpus(corpus):
+
+    def load_corpus(self, corpus):
         with open(corpus) as corpus_file:
             corpus_lines = corpus_file.read()
         return corpus_lines
@@ -56,7 +54,14 @@ class TweetBot:
     
     def reply(self, reply_within):
         pass
-            
+
+
+def load_corpus(corpus):
+    with open(corpus) as corpus_file:
+        corpus_lines = corpus_file.read()
+    return corpus_lines
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("corpus", help="filename of the text corpus used as input for the Markov chain")
