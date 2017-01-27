@@ -1,2 +1,3 @@
-tweeter_robo/twitter_credentials.py
 __pycache__
+tweeter_robo/twitter_credentials.py
+.env
