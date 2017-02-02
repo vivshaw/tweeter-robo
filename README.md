@@ -2,6 +2,10 @@
 
 A simple, Heroku-ready tweetbot written with Tweepy &amp; Markovify
 
+## What it does
+
+Tweeter Robo is just a simple Markov chain bot that posts to Twitter. To see it in action, check out my bot, [@MechaBronte](https://twitter.com/MechaBronte).
+
 ## Usage
 
 First, you'll need to register an account for your bot, [register an app](https://apps.twitter.com/), and grab your Twitter API keys. Then, things will differ depending on whether you want local or cloud deployment:
