@@ -14,7 +14,7 @@ cd tweeter-robo
 pip install -r requirements.txt
 vim tweeter_robo/twitter_credentials
 #Fill in your Twitter API keys here
-python tweeter_robo_go corpus.txt
+python tweeter_robo_go.py corpus.txt
 ```
 #### Heroku deployment
 
