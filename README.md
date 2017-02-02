@@ -26,6 +26,7 @@ python tweeter_robo_go.py corpus.txt
 git clone https://github.com/vivshaw/tweeter-robo.git
 cd tweeter-robo
 heroku create
+#Load your Twitter API keys into Heroku environment variables with the appropriate names
 git push heroku master
 heroku ps:scale worker=0
 ```
